@@ -24,10 +24,14 @@ export function useAgentState() {
     const authenticate = async () => {
       if (!process.env.NEXT_PUBLIC_API_URL) return false;
       try {
+        const formData = new URLSearchParams();
+        formData.append('username', 'demo@workflow.com');
+        formData.append('password', 'demo123');
+
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: 'demo@workflow.com', password: 'demo123' })
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formData
         });
         
         if (!res.ok) throw new Error('Authentication failed');
