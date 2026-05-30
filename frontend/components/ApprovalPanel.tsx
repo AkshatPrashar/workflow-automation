@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApprovalItem } from '../lib/mockData';
+import { ApprovalItem } from '@/lib/mockData';
 
 interface ApprovalPanelProps {
   approvals: ApprovalItem[];

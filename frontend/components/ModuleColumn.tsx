@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item } from '../lib/mockData';
+import { Item } from '@/lib/mockData';
 
 interface ModuleColumnProps {
   title: string;

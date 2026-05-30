@@ -1,11 +1,11 @@
 'use client';
 
-import { useAgentState } from '../../lib/useAgentState';
-import { Sidebar } from '../../components/Sidebar';
-import { TopBar } from '../../components/TopBar';
-import { StatsRow } from '../../components/StatsRow';
-import { ModuleColumn } from '../../components/ModuleColumn';
-import { ApprovalPanel } from '../../components/ApprovalPanel';
+import { useAgentState } from '@/lib/useAgentState';
+import { Sidebar } from '@/components/Sidebar';
+import { TopBar } from '@/components/TopBar';
+import { StatsRow } from '@/components/StatsRow';
+import { ModuleColumn } from '@/components/ModuleColumn';
+import { ApprovalPanel } from '@/components/ApprovalPanel';
 
 export default function Dashboard() {
   const { approvals, stats, lists, approve, discard, isConnected } = useAgentState();
