@@ -2,10 +2,10 @@ import React from 'react';
 
 interface StatsProps {
   stats: {
-    emailsProcessed: number;
-    draftsReady: number;
-    actionItems: number;
-    tasksCreated: number;
+    processed_emails: number;
+    meetings_scheduled: number;
+    pending_tasks: number;
+    ai_accuracy: number;
   };
 }
 
@@ -39,7 +39,7 @@ export function StatsRow({ stats }: StatsProps) {
           </svg>
         </div>
         <div className="flex items-end space-x-3 mb-6">
-          <div className="text-5xl font-bold text-[#F0F0F0] tracking-tight">{stats.emailsProcessed}</div>
+          <div className="text-5xl font-bold text-[#F0F0F0] tracking-tight">{stats.processed_emails}</div>
           <div className="flex items-center text-xs font-semibold text-[#34C77B] bg-[#34C77B]/10 px-2 py-1 rounded-md border border-[#34C77B]/20 mb-1">
             <svg className="w-3 h-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -62,7 +62,7 @@ export function StatsRow({ stats }: StatsProps) {
           </svg>
         </div>
         <div className="flex items-center justify-between">
-          <div className="text-5xl font-bold text-[#F0F0F0] tracking-tight">{stats.tasksCreated}</div>
+          <div className="text-5xl font-bold text-[#F0F0F0] tracking-tight">{stats.pending_tasks}</div>
           <div className="relative w-20 h-20">
             <svg className="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
               <path
