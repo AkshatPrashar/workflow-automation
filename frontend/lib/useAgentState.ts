@@ -27,18 +27,22 @@ export function useAgentState() {
         const formData = new URLSearchParams();
         formData.append('username', 'demo@workflow.com');
         formData.append('password', 'demo123');
+        formData.append('grant_type', '');
+        formData.append('scope', '');
+        formData.append('client_id', '');
+        formData.append('client_secret', '');
 
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData
+          body: formData.toString()
         });
         
         if (!res.ok) throw new Error('Authentication failed');
         
         const data = await res.json();
-        // Support common JWT payload structures
-        tokenRef.current = data.token || data.access_token;
+        const token = data.access_token;
+        tokenRef.current = token;
         return true;
       } catch (err) {
         console.error('Login failed:', err);
