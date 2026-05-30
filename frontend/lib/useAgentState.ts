@@ -1,14 +1,19 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { mockData, ApprovalItem } from './mockData';
+import { ApprovalItem } from './mockData'; // Keeping this import just for the ApprovalItem type if it exists there, but actually let's define it or assume it's exported. Wait, mockData.ts has the type.
 
 export function useAgentState() {
-  const [approvals, setApprovals] = useState<ApprovalItem[]>(mockData.pending_approvals);
-  const [stats, setStats] = useState(mockData.stats);
+  const [approvals, setApprovals] = useState<ApprovalItem[]>([]);
+  const [stats, setStats] = useState({
+    processed_emails: 0,
+    meetings_scheduled: 0,
+    pending_tasks: 0,
+    ai_accuracy: 0
+  });
   const [lists, setLists] = useState({
-    emails: mockData.emails,
-    meetings: mockData.meetings,
-    tasks: mockData.tasks,
+    emails: [],
+    meetings: [],
+    tasks: [],
   });
   const [isConnected, setIsConnected] = useState(false);
 
@@ -34,7 +39,7 @@ export function useAgentState() {
         
         setIsConnected(true);
       } catch (err) {
-        console.error('Failed to fetch from API, falling back to mock data', err);
+        console.error('Failed to fetch from API', err);
         setIsConnected(false);
       }
     };
@@ -53,7 +58,7 @@ export function useAgentState() {
     // Optimistic update
     setApprovals((prev) => prev.filter((item) => item.id !== id));
     
-    if (process.env.NEXT_PUBLIC_API_URL && isConnected) {
+    if (process.env.NEXT_PUBLIC_API_URL) {
       try {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/approve`, {
           method: 'POST',
@@ -70,7 +75,7 @@ export function useAgentState() {
     // Optimistic update
     setApprovals((prev) => prev.filter((item) => item.id !== id));
     
-    if (process.env.NEXT_PUBLIC_API_URL && isConnected) {
+    if (process.env.NEXT_PUBLIC_API_URL) {
       try {
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/discard`, {
           method: 'POST',
